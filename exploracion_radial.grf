@@ -1,0 +1,36 @@
+# -------------------------- Name and order of genes ------------------------- #
+genes = {ICL,ATM_ATR,gH2AX,via_FA_BRCA,Chk1_2,p53,p21,Wip1,Mdm2,cMyc,TNFa,NFkB,TGFb,Smad2_3,RL40p,ANTI_ap,HJURP,PRO_ap,Casp3,CycB/Cdk1}
+
+
+# --------------------------- Mandatory Regulations -------------------------- #
+known = {AS12-|ARF3,AS12-|miR,REV-|miR,miR-|REV,AS12-|YAB,KAN-|AS12}
+###  Hypothetical Regulations
+hypothetical = {REV-|REV,ARF3-|YAB,ARF3->YAB,REV->AS12,YAB->AS12,YAB-|AS12,ARF3-|ARF3,miR->ARF3,REV->ARF3,REV-|ARF3,ARF3->REV,ARF3-|REV,REV-|KAN,KAN-|KAN,YAB->KAN,AS12-|KAN,ARF3->KAN,KAN-|miR,KAN-|REV,KAN->YAB}
+
+
+# ----------------------------- Set of attractors ---------------------------- #
+# Attractors for a WT cell with or without DNA damage (initial ICL can be 0 or 1)
+#   order or attractors: proliferation, cell cycle arrest
+fixed-points()={0000000111*******001,*11*1*10*0**00**0*00}
+
+
+# ---------------------------- Mutant experiments ---------------------------- #
+# WT cell with ICL always 1 
+#   order of attrs: proliferation, apoptosis
+fixed-points(ICL)={0000000111*******001,111011*0*0*****00110}
+
+# Fanconi Anemia Cells 
+#   like simulating a loss-of-function mutation of via_FA_BRCA, via_FA_BRCA=0 always):
+fixed-points(~via_FA_BRCA)={}
+
+
+
+### Options
+allow.ambiguity = true
+allow.additional.states = false
+allow.additional.cycles = false
+allow.hypotheses = true
+block.steady.a.posteriori = false
+divide.query.by.topology = true
+topology.iterator.type = radial
+topological.distance.radius = 4
