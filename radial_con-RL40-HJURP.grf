@@ -1,0 +1,67 @@
+# ---------------------------------------------------------------------------- #
+#                            Ahora con RL40 y HJURP                            #
+# ---------------------------------------------------------------------------- #
+# Con radial 5 y búsqueda de una sola red no sale nada (no sale error porque block.steady.a.posteriori = true)
+    # Si block... = false entonces sale error factorial.java:35
+# Haciendo todas las regulaciones como obligatorias, quitando búsqueda radial, no sale nada 
+    # Si block... = false entonces salen los errores java:161 y java:421
+
+
+
+# -------------------------- Name and order of genes ------------------------- #
+genes = {ICL,ATM_ATR,gH2AX,via_FA_BRCA,Chk1_2,p53,p21,Wip1,Mdm2,cMyc,TNFa,NFkB,TGFb,Smad2_3,RL40p,ANTI_ap,HJURP,PRO_ap,Casp3,CycB}
+
+
+# -------------------------------- Regulations ------------------------------- #
+# Mandatory regulations 
+# known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA}
+known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA,ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
+
+
+###  Hypothetical Regulations
+# hypothetical = {ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
+
+# ----------------------------- Set of attractors ---------------------------- #
+# WT cell with or without initial DNA damage, with repair of damage
+    # order or attractors: cell cycle arrest and proliferation
+    # (last 5 instances are for proliferation)
+    # leaving HJURP as * in proliferation (the two unwanted attrs (TNFa!=NFKb) take into account both options of HJURP=0 or 1)
+# fixed-points()={11111110001100*10000,0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# WT cell without DNA damage
+    # order of attractors: proliferation
+    # (all 5 instances are for proliferation, check previously defined fixed-points)
+fixed-points(~ICL)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# WT cell with continous DNA damage
+    # order of attrs: cell cycle arrest, apoptosis
+    # (last 5 instances are for apoptosis)
+    # leaving RL40 as * in apoptosis (the two unwanted attrs (TGFb!=Smad2_3) take into account both options of HJURP=0 or 1)
+# fixed-points(ICL)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
+
+# Fanconi Anemia Cells with continous DNA damage
+    # order of attrs: 
+        # cell cycle arrest, 
+        # apoptosis (last 5 instances of fixed-points, taking into account both options of HJURP=0 or 1), 
+        # proliferation with damage (the cycle)
+# fixed-points(~via_FA_BRCA,ICL)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
+# cycles(~via_FA_BRCA,ICL) ={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Fanconi Anemia Cells without DNA damage
+    # order of attrs: cell cycle arrest, apoptosis, proliferation
+    # 2nd to  6th instances are for apoptosis
+    # 7th to 11th instances are for proliferation
+# fixed-points(~via_FA_BRCA,~ICL)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110,0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+
+
+# ---------------------------------- Options --------------------------------- #
+allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
+allow.additional.states = false     # se pide generar el conjunto exacto de estados indicados para cada situación
+allow.additional.cycles = false     # no se permiten ciclos extra (además de los que se hayan definido en cycles() )
+allow.hypotheses = false             # activar las regulaciones hipotéticas indicadas arriba
+block.steady.a.posteriori = false   # método de bloquear estados no deseados
+divide.query.by.topology = false     # análisis radial
+# topology.iterator.type = radial     # análisis radial
+# topological.distance.radius = 14     # radio máximo de búsqueda
+limit.boolean.networks = 1          # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
