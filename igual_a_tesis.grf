@@ -1,0 +1,81 @@
+# Meter exactamente las mismas regulaciones que en la tesis
+# Pedir exactamente los mismos attrs que logran en la tesis
+# Permitir attrs nuevos (ya que en la tesis no analizaron todo el espacio de edos posibles)
+
+
+# -------------------------- Name and order of genes ------------------------- #
+genes = {ICL,ATM_ATR,gH2AX,via_FA_BRCA,Chk1_2,p53,p21,Wip1,Mdm2,cMyc,TNFa,NFkB,TGFb,Smad2_3,RL40p,ANTI_ap,HJURP,PRO_ap,Casp3,CycB}
+
+#Regulations
+# Mandatory regulations 
+# known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA}
+# Todas las regulaciones:
+known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA,ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
+
+###  Hypothetical Regulations
+# hypothetical = {ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
+# Las que se sacaron por info contradictoria en tesis:
+hypothetical = {ANTI_ap-|ANTI_ap,ICL->PRO_ap,Wip1-|RL40p,ICL->via_FA_BRCA}
+
+# ----------------------------- Set of attractors ---------------------------- #
+# ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
+# Figura 17 - ICL=1
+    # Atractores: arresto 1 y apoptosis 1
+fixed-points(ICL)={11111110000000100000,11101110000000100110}
+
+# Figura 18 - ICL=1, via_FA_BRCA=0
+    # Atractores: apoptosis 1
+fixed-points(ICL,~via_FA_BRCA)={11101110000000100110}
+
+# Figura 19 - ICL=1, via_FA_BRCA=0, TNFa=1
+    # Atractores punto fijo: apoptosis 2
+    # Atractores cíclicos: proliferación con daño 1
+fixed-points(ICL,~via_FA_BRCA,TNFa)={11101110001100100110}
+cycles(ICL,~via_FA_BRCA,TNFa)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Figura 20 - ICL=1, via_FA_BRCA=0, Mdm2=1
+    # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
+    # Atractores cíclicos: apoptosis con cMyc y activación intermitente
+fixed-points(ICL,~via_FA_BRCA,Mdm2)={11101000100000000010,11101000100000000000,11101000110000001001}
+cycles(ICL,~via_FA_BRCA,Mdm2)={11101000100100000010,11101000110000010010}
+# cycles(ICL,~via_FA_BRCA,Mdm2)={11101000110000000000,11101000100000001001}
+
+# Figura 21 - ICL=1, via_FA_BRCA=0, TNFa=1, TFGb=1
+    # Atractores: apoptosis 4
+fixed-points(ICL,~via_FA_BRCA,TNFa,TFGb)={11101110001111100110}
+
+# Figura 22 - ICL=1, via_FA_BRCA=0, TNFa=1, Wip1=0
+    # Atractores: apoptosis 2
+fixed-points(ICL,~via_FA_BRCA,TNFa,~Wip1)={11101110001100100110}
+
+# Figura S1 - ICL=1, TNFa=1
+    # Atractores: apoptosis 2, proliferación con daño 1
+fixed-points(ICL,TNFa)={11101110001100100110}
+cycles(ICL,TNFa)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Figura S2 - ICL=1, Mdm2=1
+    # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
+    # Atractores cíclicos: apoptosis con cMyc y activación intermitente
+fixed-points(ICL,Mdm2)={11101000100000000010,11111000100000000000,11111000110000001001}
+cycles(ICL,Mdm2)={11101000100100000010,11101000110000010010}
+# cycles(ICL,Mdm2)={11111000110000000000,11111000100000001001}
+
+# Figura S3 - ICL=1, TNFa=1, TGFb=1
+    # Atractores: apoptosis 4 y arresto 3
+fixed-points(ICL,TNFa,TGFb)={11101110001111100110}
+cycles(ICL,TNFa,TGFb)={10000010001011000000,11100110001111000000,11111111001111100100,10000011001011100000}
+
+# Figura S4 - ICL=1, TNFa=1, Wip1=0
+    # Atractores: arresto 1 y apoptosis 2
+fixed-points(ICL,TNFa,~Wip1)={11111110001100100000,11101110001100100110}
+
+# ---------------------------------- Options --------------------------------- #
+allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
+allow.additional.states = true     # generar el conjunto exacto de estados indicados para cada situación
+allow.additional.cycles = true     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
+allow.hypotheses = true             # activar las regulaciones hipotéticas indicadas arriba
+block.steady.a.posteriori = false   # método de bloquear estados no deseados
+divide.query.by.topology = false     # análisis radial
+# topology.iterator.type = radial     # análisis radial
+# topological.distance.radius = 4     # radio máximo de búsqueda
+limit.boolean.networks = 1          # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
