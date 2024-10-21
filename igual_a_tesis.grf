@@ -1,36 +1,33 @@
 # Meter exactamente las mismas regulaciones que en la tesis
-# Pedir exactamente los mismos attrs que logran en la tesis
-# Permitir attrs nuevos (ya que en la tesis no analizaron todo el espacio de edos posibles)
-
 
 # -------------------------- Name and order of genes ------------------------- #
-genes = {ICL,ATM_ATR,gH2AX,via_FA_BRCA,Chk1_2,p53,p21,Wip1,Mdm2,cMyc,TNFa,NFkB,TGFb,Smad2_3,RL40p,ANTI_ap,HJURP,PRO_ap,Casp3,CycB}
+genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 
 
 # -------------------------------- Regulations ------------------------------- #
 # Mandatory regulations 
-# known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA}
-# Todas las regulaciones:
-known = {ANTI_ap-|PRO_ap,ATM_ATR->Chk1_2,ATM_ATR->gH2AX,ATM_ATR->p53,ATM_ATR->via_FA_BRCA,ATM_ATR-|Mdm2,Casp3->Casp3,Casp3-|CycB,Chk1_2->p53,Chk1_2-|CycB,cMyc->CycB,cMyc->p53,cMyc-|ANTI_ap,cMyc-|Mdm2,cMyc-|p21,gH2AX->via_FA_BRCA,HJURP->cMyc,HJURP-|p21,ICL->ATM_ATR,ICL->ICL,Mdm2-|p53,NFkB->ANTI_ap,NFkB->cMyc,NFkB->Wip1,p21-|CycB,p53->Mdm2,p53->p21,p53->PRO_ap,p53->Wip1,p53-|ANTI_ap,p53-|cMyc,PRO_ap->Casp3,PRO_ap-|ANTI_ap,RL40p-|Mdm2,Smad2_3->p21,Smad2_3-|cMyc,Smad2_3-|TGFb,TGFb->Smad2_3,TGFb->TGFb,TNFa->NFkB,TNFa->TNFa,via_FA_BRCA-|ICL,Wip1->Mdm2,Wip1-|ATM_ATR,Wip1-|Chk1_2,Wip1-|gH2AX,Wip1-|NFkB,Wip1-|p53,Wip1-|via_FA_BRCA,ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
-
+# known = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D}
+# All regulations:
+known = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D,P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C->F,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
 
 ###  Hypothetical Regulations
-# hypothetical = {ANTI_ap->NFkB,Casp3-|HJURP,Casp3-|via_FA_BRCA,Casp3-|Wip1,cMyc->HJURP,cMyc-|RL40p,CycB-|PRO_ap,gH2AX->p53,gH2AX-|Mdm2,ICL->Casp3,ICL->gH2AX,ICL-|Mdm2,ICL-|Wip1,NFkB-|TNFa,p53->RL40p,Smad2_3->p53,via_FA_BRCA-|Casp3,via_FA_BRCA-|PRO_ap}
+# hypothetical = {P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C->F,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
 # Las que se sacaron por info contradictoria en tesis:
-hypothetical = {ANTI_ap-|ANTI_ap,ICL->PRO_ap,Wip1-|RL40p,ICL->via_FA_BRCA}
+# hypothetical = {P-|P,A->R,H-|O,A->D}
 
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
-# Figura 17 - ICL=1
+# Figura 17 - A=1
     # Atractores: arresto 1 y apoptosis 1
-fixed-points(ICL)={11111110000000100000,11101110000000100110}
+# fixed-points(A)={11111110000000100000,11101110000000100110}
+# fixed-points()={00000000100000000001}
 
 
 # ---------------------------------- Options --------------------------------- #
 allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
 allow.additional.states = true     # generar el conjunto exacto de estados indicados para cada situación
-allow.additional.cycles = true     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
-allow.hypotheses = true             # activar las regulaciones hipotéticas indicadas arriba
+allow.additional.cycles = true     # permitir o no cAos extra (además de los que se hayan definido en cycles() )
+allow.hypotheses = false             # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
 divide.query.by.topology = false     # análisis radial
 # topology.iterator.type = radial     # análisis radial
