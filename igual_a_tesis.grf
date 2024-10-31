@@ -8,28 +8,37 @@ genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 # Mandatory regulations 
 # known = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D}
 # All regulations:
-known = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D,P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C->F,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
+known = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D,P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
 
-###  Hypothetical Regulations
+# Hypothetical Regulations
 # hypothetical = {P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C->F,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
 # Las que se sacaron por info contradictoria en tesis:
 # hypothetical = {P-|P,A->R,H-|O,A->D}
+# Todas las regulaciones de la tesis:
+# hypothetical = {P-|R,B->E,B->C,B->F,B->D,B-|I,S->S,S-|T,E->F,E-|T,J->T,J->F,J-|P,J-|I,J-|G,C->D,Q->J,Q-|G,A->B,A->A,I-|F,L->P,L->J,L->H,G-|T,F->I,F->G,F->R,F->H,F-|P,F-|J,R->S,O-|I,N->G,N-|J,N-|M,M->N,M->M,K->L,K->K,D-|A,H->I,H-|B,H-|E,H-|C,H-|L,H-|F,H-|D,P->L,S-|Q,S-|D,S-|H,J->Q,J-|O,T-|R,C->F,C-|I,A->S,A->C,A-|I,A-|H,L-|K,F->O,N->F,D-|S,D-|R,P-|P}
+
+
+# All regulations as optional, unambiguous:
+# interactions = {OPU[B:E][B:C][B:F][B:D][S:S][E:F][J:T][J:F][C:D][Q:J][A:B][A:A][L:P][L:J][L:H][F:I][F:G][F:R][F:H][R:S][M:N][M:M][K:L][K:K][H:I][P:L][J:Q][C:F][A:S][A:C][F:O][N:F][N:G],ONU[P:R][B:I][S:T][E:T][J:P][J:I][J:G][Q:G][I:F][G:T][F:P][F:J][O:I][N:J][N:M][D:A][H:B][H:E][H:C][H:L][H:F][H:D][S:Q][S:D][S:H][J:O][T:R][C:I][A:I][A:H][L:K][D:S][D:R][P:P]}
 
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
 # Figura 17 - A=1
     # Atractores: arresto 1 y apoptosis 1
 # fixed-points(A)={11111110000000100000,11101110000000100110}
-# fixed-points()={00000000100000000001}
+# Attrs obtenidos en WT en Boolnet:
+fixed-points()={00000000100000000001,11101110000000100110,00000000100000000010}
+cycles={00000000110000000001,00000000000000001001}
+cycles={00000000000100000010,00000000110000010010}
 
 
 # ---------------------------------- Options --------------------------------- #
 allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
-allow.additional.states = true     # generar el conjunto exacto de estados indicados para cada situación
-allow.additional.cycles = true     # permitir o no cAos extra (además de los que se hayan definido en cycles() )
-allow.hypotheses = false             # activar las regulaciones hipotéticas indicadas arriba
+allow.additional.states = false     # generar el conjunto exacto de estados indicados para cada situación
+allow.additional.cycles = false     # permitir o no cAos extra (además de los que se hayan definido en cycles() )
+allow.hypotheses = false            # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
-divide.query.by.topology = false     # análisis radial
-# topology.iterator.type = radial     # análisis radial
-# topological.distance.radius = 4     # radio máximo de búsqueda
-limit.boolean.networks = 1          # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
+divide.query.by.topology = false    # análisis radial
+# topology.iterator.type = radial   # análisis radial
+# topological.distance.radius = 4   # radio máximo de búsqueda
+# limit.boolean.networks = 1        # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
