@@ -1,0 +1,21 @@
+targets, factors
+A, A & !D
+B, A & !H
+C, (B | A) & !H
+D, (C|B) & !(H | S)
+E, B & !H
+F, (E | B | N | J) & !(I | H)
+G, (F | N) & !(Q | J)
+H, ((F & !A) | L) & !S
+I, (H | F | !A) & !(B | O | J | C)
+J, (L | Q) & !(F | N)
+K, K & !L
+L, (K | P) & !H
+M, M & !N
+N, M
+O, F & !J
+P, L & !(F | J | P)
+Q, J & !S
+R, F & !(P | T | D)
+S, ((R & A) | S) & !D
+T, (J | !(E | G)) & !S
