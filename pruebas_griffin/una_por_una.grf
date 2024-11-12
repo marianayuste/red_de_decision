@@ -1,0 +1,16 @@
+# Ir agregando una por una las reglas lógicas 
+
+
+genes = {A,B,D,H}
+
+interactions = {MPU[A:A][A:B],MNU[D:A][H:B]}
+update-rules = {A<-(A & ~D),B<-(A & ~H),D<-false,H<-false}
+# ,I<-false,J<-false,K<-false,L<-false,M<-false,N<-false,O<-false,P<-false,Q<-false,R<-false,S<-false,T<-false}
+
+#options
+allow.ambiguity = false
+allow.additional.states = true
+allow.additional.cycles = true
+allow.hypotheses = false
+block.steady.a.posteriori = false
+divide.query.by.topology = false
