@@ -21,7 +21,8 @@ update-rules = {A<-(A & !D),B<-(A & !H),C<-((B | A) & !H),D<-((C|B) & !(H | S)),
 
 
 # All regulations as optional, unambiguous:
-interactions = {OPU[B:E][B:C][B:F][B:D][S:S][E:F][J:T][J:F][C:D][Q:J][A:B][A:A][L:P][L:J][L:H][F:I][F:G][F:R][F:H][R:S][M:N][M:M][K:L][K:K][H:I][P:L][J:Q][A:S][A:C][F:O][N:F][N:G],ONU[P:R][B:I][S:T][E:T][J:P][J:I][J:G][Q:G][I:F][G:T][F:P][F:J][O:I][N:J][N:M][D:A][H:B][H:E][H:C][H:L][H:F][H:D][S:Q][S:D][S:H][J:O][T:R][C:I][A:I][A:H][L:K][D:S][D:R][P:P]}
+# interactions = {OPU[B:E][B:C][B:F][B:D][S:S][E:F][J:T][J:F][C:D][Q:J][A:B][A:A][L:P][L:J][L:H][F:I][F:G][F:R][F:H][R:S][M:N][M:M][K:L][K:K][H:I][P:L][J:Q][A:S][A:C][F:O][N:F][N:G],ONU[P:R][B:I][S:T][E:T][J:P][J:I][J:G][Q:G][I:F][G:T][F:P][F:J][O:I][N:J][N:M][D:A][H:B][H:E][H:C][H:L][H:F][H:D][S:Q][S:D][S:H][J:O][T:R][C:I][A:I][A:H][L:K][D:S][D:R][P:P]}
+interactions = {OUSU[B:E][B:C][B:F][B:D][S:S][E:F][J:T][J:F][C:D][Q:J][A:B][A:A][L:P][L:J][L:H][F:I][F:G][F:R][F:H][R:S][M:N][M:M][K:L][K:K][H:I][P:L][J:Q][A:S][A:C][F:O][N:F][N:G][P:R][B:I][S:T][E:T][J:P][J:I][J:G][Q:G][I:F][G:T][F:P][F:J][O:I][N:J][N:M][D:A][H:B][H:E][H:C][H:L][H:F][H:D][S:Q][S:D][S:H][J:O][T:R][C:I][A:I][A:H][L:K][D:S][D:R][P:P]}
 
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
