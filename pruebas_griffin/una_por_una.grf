@@ -1,11 +1,11 @@
 # Ir agregando una por una las reglas lógicas 
 
 
-genes = {A,B,C,D,E,F,G,H,I,J,L,N,O,Q,S}
+genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 
-interactions = {MPU[A:A][A:B][B:C][A:C][C:D][B:D][B:E][E:F][B:F][N:F][J:F][F:G][N:G][F:H][L:H][H:I][F:I][L:J][Q:J],MNU[D:A][H:B][H:C][H:D][S:D][H:E][I:F][H:F][Q:G][J:G][A:H][S:H][A:I][B:I][O:I][J:I][C:I][F:J][N:J]}
+interactions = {MPU[A:A][A:B][B:C][A:C][C:D][B:D][B:E][E:F][B:F][N:F][J:F][F:G][N:G][F:H][L:H][H:I][F:I][L:J][Q:J][K:K][K:L][P:L][M:M][M:N][F:O][L:P][J:Q][F:R],MNU[D:A][H:B][H:C][H:D][S:D][H:E][I:F][H:F][Q:G][J:G][A:H][S:H][A:I][B:I][O:I][J:I][C:I][F:J][N:J][L:K][H:L][N:M][J:O][F:P][J:P][P:P][S:Q][P:R][T:R][D:R]}
 
-update-rules = {A<-(A & ~D), B<-(A & ~H), C<-((B | A) & ~H), D<-((C|B) & ~(H | S)), E<-(B & ~H), F<-((E | B | N | J) & ~(I | H)), G<-((F | N) & ~(Q | J)), H<-(((F & ~A) | L) & ~S), I<-((H | F | ~A) & ~(B | O | J | C)), J<-((L | Q) & ~(F | N)), L<-false, N<-false, O<-false, Q<-false, S<-false}
+update-rules = {A<-(A & ~D), B<-(A & ~H), C<-((B | A) & ~H), D<-((C|B) & ~(H | S)), E<-(B & ~H), F<-((E | B | N | J) & ~(I | H)), G<-((F | N) & ~(Q | J)), H<-(((F & ~A) | L) & ~S), I<-((H | F | ~A) & ~(B | O | J | C)), J<-((L | Q) & ~(F | N)), K<-(K & ~L), L<-((K | P) & ~H), M<-(M & ~N), N<-(M), O<-(F & ~J), P<-(L & ~(F | J | P)), Q<-(J & ~S), R<-(F & ~(P | T | D)), S<-false, T<-false}
 
 #options
 allow.ambiguity = false
