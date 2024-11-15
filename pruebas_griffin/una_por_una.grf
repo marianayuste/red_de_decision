@@ -1,10 +1,13 @@
 # Ir agregando una por una las reglas lógicas 
 
 
-genes = {A,B,C,D,H,S}
+genes = {A,B,C,D,E,H,S}
+# genes = {A,B,C,D,E,F,H,I,J,N,S}
 
-interactions = {MPU[A:A][A:B][B:C][A:C][C:D][B:D],MNU[D:A][H:B][H:C][H:D][S:D]}
-update-rules = {A<-(A & ~D),B<-(A & ~H),C<-((B | A) & ~H),D<-((C|B) & ~(H | S)),H<-false,S<-false}
+interactions = {MPU[A:A][A:B][B:C][A:C][C:D][B:D][B:E],MNU[D:A][H:B][H:C][H:D][S:D][H:E]}
+# interactions = {MPU[A:A][A:B][B:C][A:C][C:D][B:D][B:E][E:F][B:F][N:F][J:F]MNU[D:A][H:B][H:C][H:D][S:D][H:E][I:F][H:F]}
+update-rules = {A<-(A & ~D), B<-(A & ~H), C<-((B | A) & ~H), D<-((C|B) & ~(H | S)), E<-(B & ~H), H<-false, S<-false}
+# update-rules = {A<-(A & ~D),B<-(A & ~H),C<-((B | A) & ~H),D<-((C|B) & ~(H | S)),E<-(B & ~H),F<-((E | B | N | J) & ~(I | H)),H<-false,I<-false,J<-false,N<-false,S<-false}
 
 #options
 allow.ambiguity = false
