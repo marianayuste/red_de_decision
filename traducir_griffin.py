@@ -3,11 +3,12 @@
 # ---------------------------------------------------------------------------- #
 import numpy as np
 import pandas as pd
+import os
 
 # ---------------------------------------------------------------------------- #
 #                  Guardar todas las redes en DataFrame redes                  #
 # ---------------------------------------------------------------------------- #
-filename = '/Users/mariana/griffin-0.1.6/examples/queries/demo/decision/igual_a_tesis.out'
+filename = 'igual_a_tesis.out'
 resultados = np.loadtxt(filename,dtype='str')
 
 # Guardar todas las redes en una lista
@@ -51,12 +52,27 @@ redes = pd.DataFrame(array_redes,
                              'len_attr_4','attr_4',
                              'len_attr_5','attr_5',
                              'len_attr_6','attr_6',
-                             'len_attr_7','attr_7',
+                            #  'len_attr_7','attr_7',
                              'total_reg',
                              'regulations'
                             ]
                     )
 
 # Guardar el archivo
-# To save
 redes.to_csv("redes.csv", index=False)
+
+
+# ---------------------------------------------------------------------------- #
+#             Crear archivos .txt de cada red para leer en BoolNet             #
+# ---------------------------------------------------------------------------- #
+# En particular para analizar si los attrs de mutantes se están generando
+cwd = os.getcwd()
+os.chdir('redes_generadas')
+nodos=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T']
+for red in range(len(resultados)):
+    arr = np.array([['targets,', 'factors']])
+    rules = redes['bool_func'][red].split(';')
+    for n in range(len(nodos)):
+        arr = np.append(arr,[[nodos[n]+',',rules[n]]],axis=0)
+    np.savetxt(str(red)+'.txt',arr,fmt='%s')
+os.chdir(cwd)
