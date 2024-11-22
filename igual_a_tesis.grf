@@ -6,26 +6,78 @@ genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 
 # -------------------------------- Regulations ------------------------------- #
 # Reglas lógicas igual a la tesis: 
-update-rules = {A<-(A & ~D),B<-(A & ~H),C<-((B | A) & ~H),D<-((C|B) & ~(H | S)),E<-(B & ~H),F<-((E | B | N | J) & ~(I | H)),G<-((F | N) & ~(Q | J)),H<-(((F & ~A) | L) & ~S),I<-((H | F | ~A) & ~(B | O | J | C)),J<-((L | Q) & ~(F | N)),K<-(K & ~L),L<-((K | P) & ~H),M<-(M & ~N),N<-(M),O<-(F & ~J),P<-(L & ~(F | J | P)),Q<-(J & ~S),R<-(F & ~(P | T | D)),S<-(((R & A) | S) & ~D),T<-((J | ~(E | G)) & ~S)}
+# update-rules = {A<-(A & ~D),B<-(A & ~H),C<-((B | A) & ~H),D<-((C|B) & ~(H | S)),E<-(B & ~H),F<-((E | B | N | J) & ~(I | H)),G<-((F | N) & ~(Q | J)),H<-(((F & ~A) | L) & ~S),I<-((H | F | ~A) & ~(B | O | J | C)),J<-((L | Q) & ~(F | N)),K<-(K & ~L),L<-((K | P) & ~H),M<-(M & ~N),N<-(M),O<-(F & ~J),P<-(L & ~(F | J | P)),Q<-(J & ~S),R<-(F & ~(P | T | D)),S<-(((R & A) | S) & ~D),T<-((J | ~(E | G)) & ~S)}
 
 # All regulations as mandatory, unambiguous:
 # Ya revisadas en una_por_una.grf (aunque no parece que hubieran cambios)
 interactions = {MPU[A:A][A:B][A:C][A:S][B:C][B:D][B:E][B:F][C:D][E:F][F:G][F:H][F:I][F:O][F:R][H:I][J:F][J:Q][J:T][K:K][K:L][L:H][L:J][L:P][M:M][M:N][N:F][N:G][P:L][Q:J][R:S][S:S], MNU[A:H][A:I][B:I][C:I][D:A][D:R][D:S][E:T][F:J][F:P][G:T][H:B][H:C][H:D][H:E][H:F][H:L][I:F][J:G][J:I][J:O][J:P][L:K][N:J][N:M][O:I][P:P][P:R][Q:G][S:D][S:H][S:Q][S:T][T:R]}
 
+
+
+
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
-# Figura 17 - A=1 (Atractores: arresto 1 y apoptosis 1)
-# fixed-points(A)={11111110000000100000,11101110000000100110}
-# Attrs obtenidos en WT en Boolnet:
-# fixed-points()={00000000100000000001,11101110000000100110,00000000100000000010}
+
+# WT (los obtenidos en el modelo original en Boolnet):
+# fixed-points()={0000000010000000001,11101110000000100110,00000000100000000010}
 # cycles={00000000110000000001,00000000000000001001}
 # cycles={00000000000100000010,00000000110000010010}
+
+# Figura 17 - A=1 (Atractores: arresto 1 y apoptosis 1)
+fixed-points(A)={11111110000000100000,11101110000000100110}
+
+# Figura 18 - ICL=1, via_FA_BRCA=0
+    # Atractores: apoptosis 1
+fixed-points(A,~D)={11101110000000100110}
+
+# Figura 19 - ICL=1, via_FA_BRCA=0, TNFa=1
+    # Atractores punto fijo: apoptosis 2
+    # Atractores cíclicos: proliferación con daño 1
+fixed-points(A,~D,K)={11101110001100100110}
+cycles(A,~D,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Figura 20 - ICL=1, via_FA_BRCA=0, Mdm2=1
+    # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
+    # Atractores cíclicos: apoptosis con cMyc y activación intermitente
+fixed-points(A,~D,I)={11101000100000000010,11101000100000000000,11101000110000001001}
+cycles(A,~D,I)={11101000100100000010,11101000110000010010}
+cycles(A,~D,I)={11101000110000000000,11101000100000001001}
+
+# Figura 21 - ICL=1, via_FA_BRCA=0, TNFa=1, TFGb=1
+    # Atractores: apoptosis 4
+fixed-points(A,~D,K,M)={11101110001111100110}
+
+# Figura 22 - ICL=1, via_FA_BRCA=0, TNFa=1, Wip1=0
+    # Atractores: apoptosis 2
+fixed-points(A,~D,K,~H)={11101110001100100110}
+
+# Figura S1 - ICL=1, TNFa=1
+    # Atractores: apoptosis 2, proliferación con daño 1
+fixed-points(A,K)={11101110001100100110}
+cycles(A,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Figura S2 - ICL=1, Mdm2=1
+    # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
+    # Atractores cíclicos: apoptosis con cMyc y activación intermitente
+fixed-points(A,I)={11101000100000000010,11111000100000000000,11111000110000001001}
+cycles(A,I)={11101000100100000010,11101000110000010010}
+cycles(A,I)={11111000110000000000,11111000100000001001}
+
+# Figura S3 - ICL=1, TNFa=1, TGFb=1
+    # Atractores: apoptosis 4 y arresto 3
+fixed-points(A,K,M)={11101110001111100110}
+cycles(A,K,M)={10000010001011000000,11100110001111000000,11111111001111100100,10000011001011100000}
+
+# Figura S4 - ICL=1, TNFa=1, Wip1=0
+    # Atractores: arresto 1 y apoptosis 2
+fixed-points(A,K,~H)={11111110001100100000,11101110001100100110}
+
 
 
 # ---------------------------------- Options --------------------------------- #
 allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
-allow.additional.states = true     # generar el conjunto exacto de estados indicados para cada situación
-allow.additional.cycles = true     # permitir o no cAos extra (además de los que se hayan definido en cycles() )
+allow.additional.states = false     # generar el conjunto exacto de estados indicados para cada situación
+allow.additional.cycles = false     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
 allow.hypotheses = false            # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
 divide.query.by.topology = false    # análisis radial
