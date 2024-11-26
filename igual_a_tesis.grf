@@ -19,11 +19,23 @@ interactions = {MPU[A:A][A:B][A:C][A:S][B:C][B:D][B:E][B:F][C:D][E:F][F:G][F:H][
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
 
 # WT (los obtenidos en el modelo original en Boolnet):
-# fixed-points()={0000000010000000001,11101110000000100110,00000000100000000010}
+# fixed-points()={00000000100000000001,11101110000000100110,00000000100000000010}
 # cycles={00000000110000000001,00000000000000001001}
 # cycles={00000000000100000010,00000000110000010010}
 
-# Figura 17 - A=1 (Atractores: arresto 1 y apoptosis 1)
+# WT con los attrs acordados con Pablo (with or without initial DNA damage, with repair of damage)
+    # order or attractors: cell cycle arrest and proliferation
+    # (last 5 instances are for proliferation)
+    # leaving HJURP as * in proliferation (the two unwanted attrs (TNFa!=NFKb) take into account both options of HJURP=0 or 1)
+fixed-points()={11111110001100*10000,0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# WT cell without DNA damage (ICL siempre apagado)
+    # order of attractors: proliferation
+    # (all 5 instances are for proliferation, check previously defined fixed-points)
+fixed-points(~ICL)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# Figura 17 - ICL=1 --> WT con daño siempre prendido
+    # Atractores: arresto 1 y apoptosis 1
 fixed-points(A)={11111110000000100000,11101110000000100110}
 
 # Figura 18 - ICL=1, via_FA_BRCA=0
@@ -34,14 +46,14 @@ fixed-points(A,~D)={11101110000000100110}
     # Atractores punto fijo: apoptosis 2
     # Atractores cíclicos: proliferación con daño 1
 fixed-points(A,~D,K)={11101110001100100110}
-cycles(A,~D,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+# cycles(A,~D,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
 
 # Figura 20 - ICL=1, via_FA_BRCA=0, Mdm2=1
     # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
     # Atractores cíclicos: apoptosis con cMyc y activación intermitente
 fixed-points(A,~D,I)={11101000100000000010,11101000100000000000,11101000110000001001}
-cycles(A,~D,I)={11101000100100000010,11101000110000010010}
-cycles(A,~D,I)={11101000110000000000,11101000100000001001}
+# cycles(A,~D,I)={11101000100100000010,11101000110000010010}
+# cycles(A,~D,I)={11101000110000000000,11101000100000001001}
 
 # Figura 21 - ICL=1, via_FA_BRCA=0, TNFa=1, TFGb=1
     # Atractores: apoptosis 4
@@ -54,19 +66,19 @@ fixed-points(A,~D,K,~H)={11101110001100100110}
 # Figura S1 - ICL=1, TNFa=1
     # Atractores: apoptosis 2, proliferación con daño 1
 fixed-points(A,K)={11101110001100100110}
-cycles(A,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+# cycles(A,K)={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
 
 # Figura S2 - ICL=1, Mdm2=1
     # Atractores punto fijo: apoptosis 3, arresto 2 y proliferación con daño 2
     # Atractores cíclicos: apoptosis con cMyc y activación intermitente
 fixed-points(A,I)={11101000100000000010,11111000100000000000,11111000110000001001}
-cycles(A,I)={11101000100100000010,11101000110000010010}
-cycles(A,I)={11111000110000000000,11111000100000001001}
+# cycles(A,I)={11101000100100000010,11101000110000010010}
+# cycles(A,I)={11111000110000000000,11111000100000001001}
 
 # Figura S3 - ICL=1, TNFa=1, TGFb=1
     # Atractores: apoptosis 4 y arresto 3
 fixed-points(A,K,M)={11101110001111100110}
-cycles(A,K,M)={10000010001011000000,11100110001111000000,11111111001111100100,10000011001011100000}
+# cycles(A,K,M)={10000010001011000000,11100110001111000000,11111111001111100100,10000011001011100000}
 
 # Figura S4 - ICL=1, TNFa=1, Wip1=0
     # Atractores: arresto 1 y apoptosis 2
@@ -77,7 +89,7 @@ fixed-points(A,K,~H)={11111110001100100000,11101110001100100110}
 # ---------------------------------- Options --------------------------------- #
 allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
 allow.additional.states = false     # generar el conjunto exacto de estados indicados para cada situación
-allow.additional.cycles = false     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
+allow.additional.cycles = true     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
 allow.hypotheses = false            # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
 divide.query.by.topology = false    # análisis radial
