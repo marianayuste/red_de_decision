@@ -1,5 +1,5 @@
 # Meter exactamente las mismas regulaciones que en la tesis
-# Lo que corrí en igual_a_tesis_WT3.grf en el hub 
+# El que corrí en el hub como WT1
 
 # -------------------------- Name and order of genes ------------------------- #
 genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
@@ -17,7 +17,7 @@ interactions = {MPU[A:A][A:B][A:C][A:S][B:C][B:D][B:E][B:F][C:D][E:F][F:G][F:H][
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
 
 # WT (los obtenidos en el modelo original en Boolnet):
-fixed-points()={00000000100000000001,11101110000000100110,00000000100000000010}
+fixed-points()={00000000100000000001}
 # cycles={00000000110000000001,00000000000000001001}
 # cycles={00000000000100000010,00000000110000010010}
 
@@ -30,7 +30,7 @@ fixed-points()={00000000100000000001,11101110000000100110,00000000100000000010}
 # WT cell without DNA damage (ICL siempre apagado)
     # order of attractors: proliferation
     # (all 5 instances are for proliferation, check previously defined fixed-points)
-# fixed-points(~A)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+fixed-points(~ICL)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
 
 # Figura 17 - ICL=1 --> WT con daño siempre prendido
     # Atractores: arresto 1 y apoptosis 1
@@ -91,3 +91,6 @@ allow.additional.cycles = true     # permitir o no ciclos extra (además de los 
 allow.hypotheses = false            # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
 divide.query.by.topology = false    # análisis radial
+# topology.iterator.type = radial   # análisis radial
+# topological.distance.radius = 4   # radio máximo de búsqueda
+# limit.boolean.networks = 1        # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
