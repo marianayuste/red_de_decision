@@ -7,6 +7,7 @@ genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 # -------------------------------- Regulations ------------------------------- #
 interactions = {MPU[A:A][A:B][B:C][B:D][C:D][B:E][B:F][E:F][J:F][F:G][N:G][F:H][L:H][F:I][H:I][L:J][Q:J][K:K][K:L][M:M][M:N][L:P][F:R][R:S][S:S][J:T][A:C][C:F][N:F][P:L][F:O][J:Q][A:S],MNU[D:A][H:B][H:C][H:D][H:E][H:F][I:F][J:G][Q:G][B:I][J:I][O:I][F:J][N:J][H:L][N:M][F:P][J:P][R:P][P:R][E:T][G:T][S:T][S:D][A:H][S:H][A:I][C:I][L:K][J:O][S:Q][D:R][T:R][D:S][S:I][N:L][I:N]}
 
+
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
 
