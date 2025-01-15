@@ -5,8 +5,7 @@ genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
 
 
 # -------------------------------- Regulations ------------------------------- #
-interactions = {MPU[A:A][A:B][B:C][B:D][C:D][B:E][B:F][E:F][J:F][F:G][N:G][F:H][L:H][F:I][H:I][L:J][Q:J][K:K][K:L][M:M][M:N][L:P][F:R][R:S][S:S][J:T][A:C][C:F][N:F][P:L][F:O][J:Q][A:S],MNU[D:A][H:B][H:C][H:D][H:E][H:F][I:F][J:G][Q:G][B:I][J:I][O:I][F:J][N:J][H:L][N:M][F:P][J:P][R:P][P:R][E:T][G:T][S:T][S:D][A:H][S:H][A:I][C:I][L:K][J:O][S:Q][D:R][T:R][D:S][S:I][N:L][I:N]}
-
+interactions = {MPU[A:A][A:B][B:C][B:D][C:D][B:E][B:F][E:F][J:F][F:G][N:G][F:H][L:H][F:I][H:I][L:J][Q:J][K:K][K:L][M:M][M:N][L:P][F:R][R:S][S:S][J:T][C:F][N:F][P:L][F:O][J:Q][A:S],MNU[D:A][H:B][H:C][H:D][H:E][H:F][I:F][J:G][Q:G][B:I][J:I][O:I][F:J][N:J][H:L][N:M][F:P][J:P][R:P][P:R][E:T][G:T][S:T][S:D][A:H][S:H][A:I][C:I][L:K][J:O][S:Q][D:R][T:R][D:S][S:I][N:L][I:N],OPU[A:C]}
 
 # ----------------------------- Set of attractors ---------------------------- #
 # ----------------- Guardados en Spreadsheet Búsqueda radial ----------------- #
@@ -20,13 +19,13 @@ fixed-points()={11111110001100*10000,0000000111**0000*001,~00000001111000000001,
 # WT cell without DNA damage (ICL siempre apagado)
     # order of attractors: proliferation
     # (all 5 instances are for proliferation, check previously defined fixed-points)
-fixed-points(~A)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+# fixed-points(~A)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
 
 # WT cell with continous DNA damage
     # order of attrs: cell cycle arrest, apoptosis
     # (last 5 instances are for apoptosis)
     # leaving RL40 as * in apoptosis (the two unwanted attrs (TGFb!=Smad2_3) take into account both options of HJURP=0 or 1)
-fixed-points(A)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
+# fixed-points(A)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
 
 # Fanconi Anemia Cells with continous DNA damage
     # order of attrs: 
@@ -48,9 +47,9 @@ fixed-points(A)={11111110001100*10000,111011100000***00110,~11101110000010000110
 allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
 allow.additional.states = false     # generar el conjunto exacto de estados indicados para cada situación
 allow.additional.cycles = false     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
-allow.hypotheses = false             # activar las regulaciones hipotéticas indicadas arriba
+allow.hypotheses = true             # activar las regulaciones hipotéticas indicadas arriba
 block.steady.a.posteriori = false   # método de bloquear estados no deseados
-divide.query.by.topology = false    # análisis radial
-# topology.iterator.type = radial   # análisis radial
-# topological.distance.radius = 10   # radio máximo de búsqueda
-# limit.boolean.networks = 1        # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
+divide.query.by.topology = true    # análisis radial
+topology.iterator.type = radial   # análisis radial
+topological.distance.radius = 1   # radio máximo de búsqueda
+limit.boolean.networks = 1        # limitar la búsqueda hasta haber encontrado cierto número de redes posibles
