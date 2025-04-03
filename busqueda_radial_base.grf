@@ -1,0 +1,49 @@
+# -------------------------- Name and order of genes ------------------------- #
+genes = {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}
+# -------------------------------- Regulations ------------------------------- #
+interactions = 
+
+# ----------------------------- Set of attractors ---------------------------- #
+# WT con los attrs acordados con Pablo (with or without initial DNA damage, with repair of damage)
+    # order or attractors: cell cycle arrest and proliferation
+    # (last 5 instances are for proliferation)
+    # leaving HJURP(Q) as * in proliferation (the two unwanted attrs (TNFa!=NFKb, i.e.: K!=L) take into account both options of HJURP(Q)=0 or 1)
+fixed-points()={11111110001100*10000,0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# WT cell without DNA damage (ICL siempre apagado)
+    # order of attractors: proliferation
+    # (all 5 instances are for proliferation, check previously defined fixed-points)
+# fixed-points(~A)={0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+# WT cell with continous DNA damage
+    # order of attrs: cell cycle arrest, apoptosis
+    # (last 5 instances are for apoptosis)
+    # leaving RL40 as * in apoptosis (the two unwanted attrs (TGFb!=Smad2_3) take into account both options of HJURP=0 or 1)
+# fixed-points(A)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
+
+# Fanconi Anemia Cells with continous DNA damage
+    # order of attrs: 
+        # cell cycle arrest, 
+        # apoptosis (last 5 instances of fixed-points, taking into account both options of HJURP=0 or 1), 
+        # proliferation with damage (the cycle)
+# fixed-points(~D,A)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110}
+# cycles(~via_FA_BRCA,ICL) ={10000000111000000001,11100000001100001001,11101101011100010001,10000001001000001001}
+
+# Fanconi Anemia Cells without DNA damage
+    # order of attrs: cell cycle arrest, apoptosis, proliferation
+    # 2nd to  6th instances are for apoptosis
+    # 7th to 11th instances are for proliferation
+# fixed-points(~D,~A)={11111110001100*10000,111011100000***00110,~11101110000010000110,~11101110000010100110,~11101110000001000110,~11101110000001100110,0000000111**0000*001,~00000001111000000001,~00000001111000001001,~00000001110100000001,~00000001110100001001}
+
+
+
+# ---------------------------------- Options --------------------------------- #
+allow.ambiguity = false             # toda regulación tiene únicamente un signo posible
+allow.additional.states = true     # generar el conjunto exacto de estados indicados para cada situación
+allow.additional.cycles = true     # permitir o no ciclos extra (además de los que se hayan definido en cycles() )
+allow.hypotheses = true             # activar las regulaciones hipotéticas indicadas arriba
+block.steady.a.posteriori = false   # método de bloquear estados no deseados
+divide.query.by.topology = true    # análisis radial
+topology.iterator.type = radial   # análisis radial
+topological.distance.radius = 2   # radio máximo de búsqueda
+# limit.boolean.networks = 1        # limitar la búsqueda hasta haber encontrado cierto número de redes posibles

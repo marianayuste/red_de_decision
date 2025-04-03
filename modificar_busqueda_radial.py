@@ -8,7 +8,7 @@ import itertools
 import os
 
 #abrir documento 
-f = open('busqueda_radial.grf', "r")
+f = open('busqueda_radial_base.grf', "r")
 grn_original = f.read().split('\n')
 
 # Guardar las regulaciones que siempre son mandatory:
@@ -43,16 +43,22 @@ for comb in itertools.combinations(O_all,2): # Para cada posible combinación de
 
     # Modificar la línea de interactions original con la modificada:
     grn_modificado = grn_original.copy()
-    grn_modificado[7] = regulaciones
+    grn_modificado[3] = regulaciones
 
-    # Guardar el nuevo documento con las regulaciones modificadas:
     cwd = os.getcwd()
+    # Guardar el nuevo documento con las regulaciones modificadas:
     os.chdir(cwd + '/combinaciones_opcionales')
     archivo = '2_' + str(n_counter) + '.grf'
     with open(archivo, 'w') as file:
         for k in grn_modificado:
             file.write(k+'\n')
+
+    # Guardar el comando para correr con griffin ese documento en la terminal:
+    out = '2_' + str(n_counter) + '.out'
+    with open('comandos.txt','a') as file:
+        file.write('griffin -f ' + archivo + ' -o ' + out + '\n')
     os.chdir(cwd)
     
     # Aumentar el contador, se usa para el título de los archivos guardados
     n_counter += 1
+
